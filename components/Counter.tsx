@@ -15,7 +15,6 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { useCounterAnimation, useGoalCelebration } from "../hooks/useAnimations";
 
 interface HistoryEntry {
     timestamp: number;
@@ -66,12 +65,13 @@ const Counter: React.FC<CounterProps> = ({
     const colorScheme = useColorScheme();
     const isDark = colorScheme === "dark";
 
-    // Animation hooks
-    const { scaleAnim } = useCounterAnimation(count);
-    const { celebrationAnim, goalReached } = useGoalCelebration(count, target);
+    // Animation refs
     const progressAnim = useRef(new Animated.Value(0)).current;
 
     const handleAction = (action: () => void) => {
+        if (Platform.OS !== "web") {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }
         action();
     };
 
@@ -257,41 +257,19 @@ const Counter: React.FC<CounterProps> = ({
                         />
                     </TouchableOpacity>
 
-                    <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-                        <Text
-                            style={[
-                                styles.countValue,
-                                {
-                                    color: goalReached ? color : textColor,
-                                },
-                            ]}
-                        >
-                            {count}
-                        </Text>
-                    </Animated.View>
-
-                    {/* Goal celebration effect */}
-                    {goalReached && (
-                        <Animated.View
-                            style={[
-                                styles.celebrationOverlay,
-                                {
-                                    opacity: celebrationAnim,
-                                    transform: [
-                                        {
-                                            scale: celebrationAnim.interpolate({
-                                                inputRange: [0, 1],
-                                                outputRange: [0.8, 1.2],
-                                            }),
-                                        },
-                                    ],
-                                },
-                            ]}
-                            pointerEvents="none"
-                        >
-                            <Text style={styles.celebrationEmoji}>🎉</Text>
-                        </Animated.View>
-                    )}
+                    <Text
+                        style={[
+                            styles.countValue,
+                            {
+                                color:
+                                    count >= (target || Infinity)
+                                        ? color
+                                        : textColor,
+                            },
+                        ]}
+                    >
+                        {count}
+                    </Text>
 
                     <TouchableOpacity
                         style={[
@@ -781,13 +759,5 @@ const styles = StyleSheet.create({
     quickMenuCancelText: {
         fontSize: 16,
         fontWeight: "700",
-    },
-    celebrationOverlay: {
-        position: "absolute",
-        top: -20,
-        alignSelf: "center",
-    },
-    celebrationEmoji: {
-        fontSize: 48,
     },
 });
