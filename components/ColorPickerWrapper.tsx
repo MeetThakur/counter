@@ -1,37 +1,14 @@
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-
-// Helper function to get contrasting text color
-const getContrastColor = (hexColor: string): string => {
-    const hex = hexColor.replace("#", "");
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? "#000" : "#FFF";
-};
+import { PRESET_COLORS } from "../constants/colors";
+import { getContrastColor } from "../utils/colors";
 
 interface ColorPickerWrapperProps {
     selectedColor: string;
     onSelectColor: (color: string) => void;
 }
-
-const PRESET_COLORS = [
-    "#007AFF",
-    "#34C759",
-    "#FF9500",
-    "#FF3B30",
-    "#5856D6",
-    "#AF52DE",
-    "#FF2D55",
-    "#5AC8FA",
-    "#4CD964",
-    "#FFCC00",
-    "#8E8E93",
-    "#000000",
-];
 
 export const ColorPickerWrapper: React.FC<ColorPickerWrapperProps> = ({
     selectedColor,

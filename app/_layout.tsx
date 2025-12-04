@@ -7,6 +7,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 
 export const unstable_settings = {
@@ -34,8 +35,10 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
     return (
-        <ThemeProvider>
-            <RootLayoutNav />
-        </ThemeProvider>
+        <ErrorBoundary>
+            <ThemeProvider>
+                <RootLayoutNav />
+            </ThemeProvider>
+        </ErrorBoundary>
     );
 }

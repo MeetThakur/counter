@@ -2,9 +2,11 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
+    Alert,
     KeyboardAvoidingView,
     Modal,
     Platform,
+    RefreshControl,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -13,17 +15,18 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    RefreshControl,
-    Alert,
 } from "react-native";
 import DraggableFlatList, {
-    ScaleDecorator,
     RenderItemParams,
+    ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ColorPickerWrapper } from "../../components/ColorPickerWrapper";
 import Counter from "../../components/Counter";
+import { PRESET_COLORS } from "../../constants/colors";
+import { COUNTER_TEMPLATES } from "../../constants/templates";
 import { useTheme } from "../../contexts/ThemeContext";
+import { getContrastColor } from "../../utils/colors";
 
 interface HistoryEntry {
     timestamp: number;
@@ -39,44 +42,7 @@ interface CounterItem {
     history: HistoryEntry[];
 }
 
-const COLORS = [
-    "#007AFF",
-    "#34C759",
-    "#FF9500",
-    "#FF3B30",
-    "#5856D6",
-    "#AF52DE",
-    "#FF2D55",
-    "#5AC8FA",
-];
-
-const COUNTER_TEMPLATES = [
-    { name: "Water Glasses", icon: "💧", target: 8, color: "#5AC8FA" },
-    { name: "Coffee Cups", icon: "☕", target: 3, color: "#8B4513" },
-    { name: "Steps", icon: "👟", target: 10000, color: "#FF9500" },
-    { name: "Push-ups", icon: "💪", target: 50, color: "#FF3B30" },
-    { name: "Pages Read", icon: "📖", target: 30, color: "#5856D6" },
-    { name: "Meditation", icon: "🧘", target: 1, color: "#34C759" },
-    { name: "Tasks Done", icon: "✅", target: 10, color: "#007AFF" },
-    { name: "Calls Made", icon: "📞", target: 5, color: "#AF52DE" },
-];
-
-// Helper function to get contrasting text color
-const getContrastColor = (hexColor: string): string => {
-    // Remove # if present
-    const hex = hexColor.replace("#", "");
-
-    // Convert to RGB
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-
-    // Calculate luminance
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-    // Return black for light colors, white for dark colors
-    return luminance > 0.5 ? "#000" : "#FFF";
-};
+// All constants and utilities are now imported from shared files
 
 export default function HomeScreen() {
     const [counters, setCounters] = useState<CounterItem[]>([]);
@@ -87,7 +53,7 @@ export default function HomeScreen() {
     );
     const [newCounterName, setNewCounterName] = useState("");
     const [newCounterTarget, setNewCounterTarget] = useState("");
-    const [selectedColor, setSelectedColor] = useState(COLORS[0]);
+    const [selectedColor, setSelectedColor] = useState<string>(PRESET_COLORS[0]);
     const [refreshing, setRefreshing] = useState(false);
     const [recentlyDeleted, setRecentlyDeleted] = useState<CounterItem | null>(
         null,
@@ -140,7 +106,7 @@ export default function HomeScreen() {
     const openAddModal = () => {
         setNewCounterName("");
         setNewCounterTarget("");
-        setSelectedColor(COLORS[0]);
+        setSelectedColor(PRESET_COLORS[0]);
         setShowTemplates(false);
         setModalVisible(true);
     };
@@ -169,7 +135,7 @@ export default function HomeScreen() {
         setEditingCounter(counter);
         setNewCounterName(counter.name);
         setNewCounterTarget(counter.target?.toString() || "");
-        setSelectedColor(counter.color || COLORS[0]);
+        setSelectedColor(counter.color || PRESET_COLORS[0]);
         setEditModalVisible(true);
     };
 
@@ -180,13 +146,13 @@ export default function HomeScreen() {
             counters.map((counter) =>
                 counter.id === editingCounter.id
                     ? {
-                          ...counter,
-                          name: newCounterName,
-                          target: newCounterTarget
-                              ? parseInt(newCounterTarget)
-                              : undefined,
-                          color: selectedColor,
-                      }
+                        ...counter,
+                        name: newCounterName,
+                        target: newCounterTarget
+                            ? parseInt(newCounterTarget)
+                            : undefined,
+                        color: selectedColor,
+                    }
                     : counter,
             ),
         );
@@ -207,16 +173,16 @@ export default function HomeScreen() {
             counters.map((counter) =>
                 counter.id === id
                     ? {
-                          ...counter,
-                          count: counter.count + amount,
-                          history: [
-                              ...counter.history,
-                              {
-                                  timestamp: Date.now(),
-                                  action: "increment" as const,
-                              },
-                          ],
-                      }
+                        ...counter,
+                        count: counter.count + amount,
+                        history: [
+                            ...counter.history,
+                            {
+                                timestamp: Date.now(),
+                                action: "increment" as const,
+                            },
+                        ],
+                    }
                     : counter,
             ),
         );
@@ -227,16 +193,16 @@ export default function HomeScreen() {
             counters.map((counter) =>
                 counter.id === id
                     ? {
-                          ...counter,
-                          count: Math.max(0, counter.count - 1),
-                          history: [
-                              ...counter.history,
-                              {
-                                  timestamp: Date.now(),
-                                  action: "decrement" as const,
-                              },
-                          ],
-                      }
+                        ...counter,
+                        count: Math.max(0, counter.count - 1),
+                        history: [
+                            ...counter.history,
+                            {
+                                timestamp: Date.now(),
+                                action: "decrement" as const,
+                            },
+                        ],
+                    }
                     : counter,
             ),
         );

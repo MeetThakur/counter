@@ -1,3 +1,5 @@
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { getContrastColor } from "@/utils/colors";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import React, { useEffect, useRef, useState } from "react";
@@ -13,22 +15,11 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { useColorScheme } from "@/hooks/use-color-scheme";
 
 interface HistoryEntry {
     timestamp: number;
     action: "increment" | "decrement";
 }
-
-// Helper function to get contrasting text color
-const getContrastColor = (hexColor: string): string => {
-    const hex = hexColor.replace("#", "");
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? "#000" : "#FFF";
-};
 
 interface CounterProps {
     id: string;
@@ -386,13 +377,13 @@ const Counter: React.FC<CounterProps> = ({
                                                     {
                                                         color:
                                                             entry.action ===
-                                                            "increment"
+                                                                "increment"
                                                                 ? isDark
                                                                     ? "#32D74B"
                                                                     : "#34C759"
                                                                 : isDark
-                                                                  ? "#FF9F0A"
-                                                                  : "#FF9500",
+                                                                    ? "#FF9F0A"
+                                                                    : "#FF9500",
                                                     },
                                                 ]}
                                             >
