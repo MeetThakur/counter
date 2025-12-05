@@ -4,11 +4,11 @@ A powerful, customizable tally counter app built with [Expo](https://expo.dev) a
 
 ## ✨ Features
 
+- **Intuitive Gestures**: Swipe left to delete, swipe right to edit, long-press to drag
 - **Multiple Tallies**: Create and manage unlimited counters
 - **Drag to Reorder**: Long-press and drag counters to rearrange them
 - **Edit Counters**: Modify counter name, target, and color anytime
 - **Bulk Operations**: Select multiple counters for batch delete/reset
-- **Quick Actions Menu**: Long-press counters for quick edit/delete/reset options
 - **Undo Delete**: Accidentally deleted? Undo within 5 seconds
 - **Pull to Refresh**: Swipe down to reload your counters
 - **Custom Colors**: Choose from preset colors or create custom colors with a color wheel picker
@@ -16,7 +16,8 @@ A powerful, customizable tally counter app built with [Expo](https://expo.dev) a
 - **History**: View timestamp history for each increment
 - **Theme Switching**: Toggle between light and dark mode with a single tap
 - **Neobrutal Design**: Bold, eye-catching aesthetic with thick borders and hard shadows
-- **Haptic Feedback**: Tactile responses on iOS and Android
+- **Haptic Feedback**: Rich tactile responses for every interaction
+- **Subtle Animations**: Polished, smooth transitions and micro-interactions
 - **Cross-Platform**: Works seamlessly on iOS, Android, and Web
 - **Data Persistence**: All counters are saved locally using AsyncStorage
 
@@ -45,18 +46,21 @@ You can start developing by editing the files inside the **app** directory. This
 
 ## 🎯 Quality of Life Features
 
+### 👆 Swipe Gestures
+- **Swipe Left**: Reveal the **Delete** button to quickly remove a counter
+- **Swipe Right**: Reveal the **Edit** button to modify counter details
+- **Haptic Feedback**: Feel a satisfying click when swiping
+
 ### ↕️ Drag to Reorder
 - **Long-press** any counter to activate drag mode
 - **Drag** the counter up or down to reorder
 - **Release** to drop it in the new position
 - Order is automatically saved
 
-### ⚡ Quick Actions Menu
-Long-press any counter (when not dragging) to open the quick actions menu:
-- ✏️ **Edit Counter** - Quick access to edit modal
-- 🕐 **View History** - See all your increments
-- 🔄 **Reset Counter** - Zero out the count
-- 🗑️ **Delete Counter** - Remove the counter
+### ⚡ Quick Actions
+- **Tap +/-**: Increment or decrement count
+- **Long-press Count**: Quickly edit the current count number
+- **Tap Title**: Open edit modal
 
 ### ↩️ Undo Delete
 - Delete a counter by mistake? No problem!
@@ -91,9 +95,10 @@ Each counter has an edit button (pencil icon) that allows you to:
 - **Change the name**: Update the counter label
 - **Modify the target**: Add, change, or remove goal numbers
 - **Pick a new color**: Choose any color from the picker
+- **Edit Current Count**: Directly set the count value
 - **Preserve count and history**: Your progress is never lost
 
-Simply tap the pencil icon on any counter to open the edit modal!
+Simply swipe right or tap the pencil icon on any counter to open the edit modal!
 
 ## 🌓 Theme Switching
 
@@ -114,6 +119,7 @@ The app features a bold **neobrutal** (neobrutalism) design aesthetic:
 - **Square Corners**: Zero border radius for geometric shapes
 - **High Contrast**: Black borders and shadows on vibrant colors
 - **Playful Colors**: Yellow add button, pink theme toggle, colorful counters
+- **Polished Empty States**: Engaging visuals when no counters exist
 
 This design style is energetic, accessible, and Instagram-worthy!
 
