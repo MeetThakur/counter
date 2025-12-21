@@ -1,21 +1,50 @@
-# Tallies 🔢
-A simple, elegant tally counter app built with Expo and React Native.
+<p align="center">
+  <img src="./assets/images/icon.png" width="128" height="128" alt="Tallies Logo" />
+</p>
 
-## Features
-- **Multiple Counters** - Track unlimited tallies
-- **Custom Increment/Decrement** - Long-press +/- buttons for custom amounts
-- **Goal Tracking** - Set targets and visualize progress
-- **Swipe Gestures** - Swipe to delete or edit
-- **Drag to Reorder** - Long-press to rearrange counters
-- **Bulk Operations** - Select multiple counters to reset or delete
-- **Negative Numbers** - Support for negative counts
-- **Dark Mode** - Toggle between light and dark themes
-- **Undo Delete** - 5-second window to restore deleted counters
-- **Custom Colors** - Choose from presets or pick any color
+<h1 align="center">Tallies</h1>
 
-## Quick Start
+<p align="center">
+  <img src="./assets/images/banner.png" width="100%" alt="Tallies Banner" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.3.0-blue.svg" alt="Version" />
+  <img src="https://img.shields.io/badge/Expo-SDK%2054-lightgrey.svg" alt="Expo" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" />
+  <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-orange.svg" alt="Platform" />
+</p>
+
+---
+
+**Tallies** is a simple, elegant, and powerful tally counter app built with Expo and React Native. Designed for efficiency and ease of use, it allows you to track multiple counters, set goals, and manage your data with modern gestures and interaction patterns.
+
+## ✨ Key Features
+
+- 📊 **Multiple Counters** – Track unlimited tallies for anything you need.
+- 🎯 **Goal Tracking** – Set targets for your counters and visualize your progress with smooth progress bars.
+- 🤏 **Gesture-Driven UX** – Swipe to delete or edit. Long-press to rearrange your counters via dragging.
+- ➕ **Smart Increments** – Tap to increment/decrement. Long-press the buttons to add/subtract custom amounts.
+- 🌓 **Dynamic Theming** – Seamlessly switch between light and dark modes.
+- 📦 **Bulk Operations** – Select multiple items to reset or delete them all at once.
+- ✨ **Haptic Feedback** – Tactile feedback for every interaction (tap, long-press, swipe).
+- 🔄 **Backup & Restore** – Export your counters to a JSON file and import them back anytime.
+- 🔍 **Search & Sort** – Find counters quickly and sort them by name, count, or date.
+- ↩️ **Safety Undo** – Accidents happen. Get a 5-second window to restore deleted counters.
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js installed
+- Expo Go app on your mobile device (optional, for testing)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+
 # Install dependencies
 npm install
 
@@ -23,23 +52,54 @@ npm install
 npx expo start
 ```
 
-## Build APK
+## 🛠️ Tech Stack
+
+- **Framework**: [Expo SDK 54](https://expo.dev/)
+- **Core**: [React Native](https://reactnative.dev/)
+- **Navigation**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based)
+- **State & Storage**: [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+- **Animations**: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+- **Interactions**: [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)
+- **Utility**: [Expo Haptics](https://docs.expo.dev/versions/latest/sdk/haptics/), [React Native Draggable FlatList](https://github.com/computerjazz/react-native-draggable-flatlist)
+
+## 📱 Build APK
+
+We recommend using Expo Application Services (EAS) for building:
 
 ```bash
-# Cloud build (recommended)
+# Cloud build for Android
 npx eas-cli build --platform android --profile preview
-
-# Download from: https://expo.dev
 ```
 
-## Tech Stack
+## 📂 Project Structure
 
-- **Expo SDK 54** - React Native framework
-- **TypeScript** - Type-safe development
-- **AsyncStorage** - Local data persistence
-- **Expo Router** - File-based navigation
-- **React Native Gesture Handler** - Swipe and drag interactions
+```text
+├── app/            # Expo Router screens and layouts
+├── components/     # Reusable UI components
+├── constants/      # App constants (Colors, Typography)
+├── contexts/       # React Contexts (Theme)
+├── hooks/          # Custom React hooks (useCounters, useSelection)
+├── utils/          # Helper functions (DataManager, Export/Import)
+└── assets/         # Images, fonts, and static assets
+```
 
-## License
+## 🤝 Contributing
 
-MIT
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## ⚖️ License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+<p align="center">
+  <img src="./assets/images/icon.png" width="32" height="32" alt="Tallies Icon" /><br/>
+  Made with ❤️ for productivity
+</p>
