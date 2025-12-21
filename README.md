@@ -5,10 +5,6 @@
 <h1 align="center">Tallies</h1>
 
 <p align="center">
-  <img src="./assets/images/banner.png" width="100%" alt="Tallies Banner" />
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/version-1.3.0-blue.svg" alt="Version" />
   <img src="https://img.shields.io/badge/Expo-SDK%2054-lightgrey.svg" alt="Expo" />
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" />
